@@ -1,4 +1,12 @@
-"""Cloudlab profile for the experiment at https://witestlab.poly.edu/blog/adaptive-video-reproducing/ """
+""" 
+
+## Adaptive video
+
+This experiment explores the tradeoff between different metrics of video quality (average rate, interruptions, and variability of rate) in an adaptive video delivery system.
+
+It should take about 60-120 minutes to run this experiment.
+
+Instructions for running the experiment are at: https://witestlab.poly.edu/blog/adaptive-video-reproducing/ """
 
 #
 # NOTE: This code was machine converted. An actual human would not
