@@ -61,3 +61,7 @@ link_1.addInterface(iface2)
 link_1.addInterface(iface4)
 link_1.addInterface(iface5)
 
+
+# Print the generated rspec
+pc.printRequestRSpec(request)
+
