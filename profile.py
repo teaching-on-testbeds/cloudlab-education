@@ -30,7 +30,7 @@ iface1 = node_dijkstra.addInterface('interface-8', pg.IPv4Address('10.10.5.1','2
 # Node knuth
 node_knuth = request.XenVM('knuth')
 node_knuth.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-=node_knuth.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
+node_knuth.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_knuth.addService(pg.Execute('/bin/sh','sudo wget -O /etc/profile.d/link-status-message.sh https://git.io/JUBmU; sudo chmod a+x /etc/profile.d/link-status-message.sh'))
 node_knuth.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSLc2 | bash; wget -O - https://git.io/vSC5r | bash'))
 iface2 = node_knuth.addInterface('interface-11', pg.IPv4Address('10.10.6.2','255.255.255.0'))
