@@ -5,7 +5,7 @@
 The exercises in this experiment will focus on the confidentiality of network services - to what extent are services that offer remote login, file transfer, or web access, protected from disclosure to unauthorized individuals? 
 In particular, we will consider confidentiality with respect to malicious users who might be eavesdropping on network traffic.
 
-Instructions for running the experiment are at: https://witestlab.poly.edu/blog/secure-applications/"""
+Instructions for running the experiment are at: https://witestlab.poly.edu/blog/secure-networked-applications/"""
 
 #
 # NOTE: This code was machine converted. An actual human would not
