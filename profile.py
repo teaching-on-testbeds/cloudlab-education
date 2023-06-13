@@ -28,7 +28,7 @@ request = pc.makeRequestRSpec()
 
 # Node router-a
 node_router_a = request.XenVM('router-a')
-node_router_a.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_router_a.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_router_a.Site('Site 1')
 node_router_a.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_a.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
@@ -37,7 +37,7 @@ iface1 = node_router_a.addInterface('interface-0', pg.IPv4Address('10.10.100.1',
 
 # Node router-b
 node_router_b = request.XenVM('router-b')
-node_router_b.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_router_b.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_router_b.Site('Site 1')
 node_router_b.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_b.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
@@ -46,7 +46,7 @@ iface3 = node_router_b.addInterface('interface-9', pg.IPv4Address('0.0.0.0','0.0
 
 # Node router-c
 node_router_c = request.XenVM('router-c')
-node_router_c.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_router_c.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_router_c.Site('Site 1')
 node_router_c.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_c.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
@@ -55,7 +55,7 @@ iface5 = node_router_c.addInterface('interface-13', pg.IPv4Address('0.0.0.0','0.
 
 # Node juliet
 node_juliet = request.XenVM('juliet')
-node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_juliet.Site('Site 1')
 node_juliet.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_juliet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
@@ -63,7 +63,7 @@ iface6 = node_juliet.addInterface('interface-6', pg.IPv4Address('0.0.0.0','0.0.0
 
 # Node romeo
 node_romeo = request.XenVM('romeo')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_romeo.Site('Site 1')
 node_romeo.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
@@ -71,7 +71,7 @@ iface7 = node_romeo.addInterface('interface-4', pg.IPv4Address('0.0.0.0','0.0.0.
 
 # Node othello
 node_othello = request.XenVM('othello')
-node_othello.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_othello.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_othello.Site('Site 1')
 node_othello.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_othello.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
@@ -79,7 +79,7 @@ iface8 = node_othello.addInterface('interface-8', pg.IPv4Address('0.0.0.0','0.0.
 
 # Node desdemona
 node_desdemona = request.XenVM('desdemona')
-node_desdemona.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_desdemona.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_desdemona.Site('Site 1')
 node_desdemona.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_desdemona.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
@@ -87,7 +87,7 @@ iface9 = node_desdemona.addInterface('interface-10', pg.IPv4Address('0.0.0.0','0
 
 # Node ophelia
 node_ophelia = request.XenVM('ophelia')
-node_ophelia.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_ophelia.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_ophelia.Site('Site 1')
 node_ophelia.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_ophelia.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
@@ -95,7 +95,7 @@ iface10 = node_ophelia.addInterface('interface-14', pg.IPv4Address('0.0.0.0','0.
 
 # Node hamlet
 node_hamlet = request.XenVM('hamlet')
-node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD'
+node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_hamlet.Site('Site 1')
 node_hamlet.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_hamlet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
