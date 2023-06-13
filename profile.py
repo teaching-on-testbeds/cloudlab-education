@@ -22,52 +22,52 @@ request = pc.makeRequestRSpec()
 
 # Node romeo
 node_romeo = request.XenVM('romeo')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface0 = node_romeo.addInterface('interface-romeo-link3-4', pg.IPv4Address('10.10.0.100','255.255.255.0'))
 
 # Node hamlet
 node_hamlet = request.XenVM('hamlet')
-node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_hamlet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface1 = node_hamlet.addInterface('interface-hamlet-link1-2', pg.IPv4Address('10.10.0.102','255.255.255.0'))
 
 # Node othello
 node_othello = request.XenVM('othello')
-node_othello.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_othello.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_othello.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface2 = node_othello.addInterface('interface-othello-link2-3', pg.IPv4Address('10.10.0.104','255.255.255.0'))
 
 # Node petruchio
 node_petruchio = request.XenVM('petruchio')
-node_petruchio.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_petruchio.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_petruchio.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface3 = node_petruchio.addInterface('interface-petruchio-link1-4', pg.IPv4Address('10.10.0.106','255.255.255.0'))
 
 # Node bridge-1
 node_bridge_1 = request.XenVM('bridge-1')
-node_bridge_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_bridge_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_bridge_1.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface4 = node_bridge_1.addInterface('interface-br1-link1-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface5 = node_bridge_1.addInterface('interface-br1-link1-2', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-2
 node_bridge_2 = request.XenVM('bridge-2')
-node_bridge_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_bridge_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_bridge_2.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface6 = node_bridge_2.addInterface('interface-br2-link1-2', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface7 = node_bridge_2.addInterface('interface-br2-link2-3', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-3
 node_bridge_3 = request.XenVM('bridge-3')
-node_bridge_3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_bridge_3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_bridge_3.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface8 = node_bridge_3.addInterface('interface-br3-link2-3', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface9 = node_bridge_3.addInterface('interface-br3-link3-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-4
 node_bridge_4 = request.XenVM('bridge-4')
-node_bridge_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_bridge_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_bridge_4.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
 iface10 = node_bridge_4.addInterface('interface-br4-link1-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface11 = node_bridge_4.addInterface('interface-br4-link3-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
