@@ -28,30 +28,30 @@ request = pc.makeRequestRSpec()
 
 # Node bridge
 node_bridge = request.XenVM('bridge')
-node_bridge.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_bridge.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 iface0 = node_bridge.addInterface('interface-1', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface1 = node_bridge.addInterface('interface-3', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface2 = node_bridge.addInterface('interface-5', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface3 = node_bridge.addInterface('interface-6', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node node-1
-node_1 = request.XenVM('node-1')
-node_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_1 = request.XenVM('romeo')
+node_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 iface4 = node_1.addInterface('interface-0', pg.IPv4Address('10.0.0.1','255.255.255.0'))
 
 # Node node-2
-node_2 = request.XenVM('node-2')
-node_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_2 = request.XenVM('juliet')
+node_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 iface5 = node_2.addInterface('interface-2', pg.IPv4Address('10.0.0.2','255.255.255.0'))
 
 # Node node-3
-node_3 = request.XenVM('node-3')
-node_3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_3 = request.XenVM('hamlet')
+node_3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 iface6 = node_3.addInterface('interface-4', pg.IPv4Address('10.0.0.3','255.255.255.0'))
 
 # Node node-4
-node_4 = request.XenVM('node-4')
-node_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_4 = request.XenVM('ophelia')
+node_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 iface7 = node_4.addInterface('interface-7', pg.IPv4Address('10.0.0.4','255.255.255.0'))
 
 # Link link-1
