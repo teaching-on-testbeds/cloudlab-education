@@ -1,3 +1,5 @@
+"""Topology for Dynamic Routing RIP and ICMP experiments"""
+
 #
 # NOTE: This code was machine converted. An actual human would not
 #       write code like this!
