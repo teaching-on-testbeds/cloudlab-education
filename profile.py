@@ -35,18 +35,21 @@ iface2 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.1.100','25
 node_juliet = request.XenVM('juliet')
 node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 node_juliet.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
+node_juliet.addService(pg.Execute('/bin/sh','sudo apt update; sudo apt -y install iperf'))
 iface3 = node_juliet.addInterface('interface-2', pg.IPv4Address('10.10.1.101','255.255.255.0'))
 
 # Node hamlet
 node_hamlet = request.XenVM('hamlet')
 node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 node_hamlet.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
+node_hamlet.addService(pg.Execute('/bin/sh','sudo apt update; sudo apt -y install iperf'))
 iface4 = node_hamlet.addInterface('interface-5', pg.IPv4Address('10.10.1.102','255.255.255.0'))
 
 # Node ophelia
 node_ophelia = request.XenVM('ophelia')
 node_ophelia.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 node_ophelia.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
+node_ophelia.addService(pg.Execute('/bin/sh','sudo apt update; sudo apt -y install iperf'))
 iface5 = node_ophelia.addInterface('interface-4', pg.IPv4Address('10.10.2.103','255.255.255.0'))
 
 # Link link-0
