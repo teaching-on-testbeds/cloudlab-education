@@ -1,8 +1,9 @@
-"""This is a basic profile with two hosts connected by a router.
-Instructions:
-Wait for the profile instance to start, then log in to each node by clicking on it in the topology and choosing the `shell` menu item. 
-"""
+"""Topology where two hosts are directly connected"""
 
+#
+# NOTE: This code was machine converted. An actual human would not
+#       write code like this!
+#
 
 # Import the Portal object.
 import geni.portal as portal
@@ -19,34 +20,21 @@ request = pc.makeRequestRSpec()
 
 # Node romeo
 node_romeo = request.XenVM('romeo')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
-iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.1.100','255.255.255.0'))
+node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
+node_romeo.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
+iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.0.100','255.255.255.0'))
 
 # Node juliet
 node_juliet = request.XenVM('juliet')
-node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-node_juliet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
-iface1 = node_juliet.addInterface('interface-3', pg.IPv4Address('10.10.2.100','255.255.255.0'))
-
-# Node router
-node_router = request.XenVM('router')
-node_router.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-node_router.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
-iface2 = node_router.addInterface('interface-0', pg.IPv4Address('10.10.1.1','255.255.255.0'))
-iface3 = node_router.addInterface('interface-2', pg.IPv4Address('10.10.2.1','255.255.255.0'))
+node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
+node_juliet.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
+iface1 = node_juliet.addInterface('interface-0', pg.IPv4Address('10.10.0.101','255.255.255.0'))
 
 # Link link-0
 link_0 = request.Link('link-0')
-link_0.addInterface(iface2)
+link_0.addInterface(iface1)
 link_0.addInterface(iface0)
-
-# Link link-1
-link_1 = request.Link('link-1')
-link_1.addInterface(iface3)
-link_1.addInterface(iface1)
 
 
 # Print the generated rspec
 pc.printRequestRSpec(request)
-
