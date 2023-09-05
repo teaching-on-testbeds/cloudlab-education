@@ -19,19 +19,19 @@ request = pc.makeRequestRSpec()
 
 # Node romeo
 node_romeo = request.XenVM('romeo')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
 iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.1.100','255.255.255.0'))
 
 # Node juliet
 node_juliet = request.XenVM('juliet')
-node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_juliet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
 iface1 = node_juliet.addInterface('interface-3', pg.IPv4Address('10.10.2.100','255.255.255.0'))
 
 # Node router
 node_router = request.XenVM('router')
-node_router.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+node_router.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 node_router.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
 iface2 = node_router.addInterface('interface-0', pg.IPv4Address('10.10.1.1','255.255.255.0'))
 iface3 = node_router.addInterface('interface-2', pg.IPv4Address('10.10.2.1','255.255.255.0'))
