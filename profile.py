@@ -1,4 +1,4 @@
-"""Topology for ARP exercises"""
+"""Topology for ARP exercises. To run this experiment, refer to the instructions at https://witestlab.poly.edu/blog/address-resolution-protocol-arp/ """
 
 #
 # NOTE: This code was machine converted. An actual human would not
@@ -28,23 +28,11 @@ node_juliet = request.XenVM('juliet')
 node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 iface1 = node_juliet.addInterface('interface-0', pg.IPv4Address('10.0.0.101','255.255.255.0'))
 
-# Node hamlet
-node_hamlet = request.XenVM('hamlet')
-node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-iface2 = node_hamlet.addInterface('interface-2', pg.IPv4Address('10.0.0.102','255.255.255.0'))
-
-# Node ophelia
-node_ophelia = request.XenVM('ophelia')
-node_ophelia.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-iface3 = node_ophelia.addInterface('interface-3', pg.IPv4Address('10.0.0.103','255.255.255.0'))
-
 # Link link-0
 link_0 = request.Link('link-0')
 link_0.disableMACLearning()
 link_0.addInterface(iface1)
 link_0.addInterface(iface0)
-link_0.addInterface(iface2)
-link_0.addInterface(iface3)
 
 
 # Print the generated rspec
