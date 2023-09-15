@@ -52,7 +52,7 @@ iface6 = node_3.addInterface('interface-4', pg.IPv4Address('10.0.0.102','255.255
 # Node node-4
 node_4 = request.XenVM('ophelia')
 node_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-iface7 = node_4.addInterface('interface-7', pg.IPv4Address('10.0.0.104','255.255.255.0'))
+iface7 = node_4.addInterface('interface-7', pg.IPv4Address('10.0.0.103','255.255.255.0'))
 
 # Link link-1
 link_1 = request.Link('link-1')
