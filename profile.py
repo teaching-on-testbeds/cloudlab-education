@@ -19,19 +19,22 @@ pc = portal.Context()
 request = pc.makeRequestRSpec()
 
 # Node romeo
-node_romeo = request.XenVM('client')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
-iface0 = node_romeo.addInterface('interface-r', pg.IPv4Address('10.10.1.1','255.255.255.0'))
+node_client = request.XenVM('client')
+node_client.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
+node_client.exclusive = False
+iface0 = node_client.addInterface('interface-r', pg.IPv4Address('10.10.1.1','255.255.255.0'))
 
 # Node juliet
-node_juliet = request.XenVM('server')
-node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
-iface1 = node_juliet.addInterface('interface-j', pg.IPv4Address('10.10.1.2','255.255.255.0'))
+node_server = request.XenVM('server')
+node_server.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
+node_server.exclusive = False
+iface1 = node_server.addInterface('interface-j', pg.IPv4Address('10.10.1.2','255.255.255.0'))
 
 # Node hamlet
-node_hamlet = request.XenVM('attacker')
-node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
-iface2 = node_hamlet.addInterface('interface-h', pg.IPv4Address('10.10.1.3','255.255.255.0'))
+node_attacker = request.XenVM('attacker')
+node_attacker.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU18-64-STD'
+node_attacker.exclusive = False
+iface2 = node_attacker.addInterface('interface-h', pg.IPv4Address('10.10.1.3','255.255.255.0'))
 
 # Link link-0
 link_0 = request.Link('link-0')
