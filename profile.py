@@ -1,4 +1,13 @@
-"""Topology for exercises on network layer security"""
+"""
+
+## Network layer security
+
+
+The exercises in this experiment will focus on security services offered at the **network layer** of the TCP/IP protocol stack. You will configure a network with a VPN tunnel, and then you will examine the extent to which you are protected from unauthorized eavesdroppers on network traffic, when you use a file transfer application (with and without [application layer confidentiality](https://witestlab.poly.edu/blog/secure-networked-applications/)).
+
+It should take about 60-120 minutes to run this experiment.
+
+Instructions for running the experiment are at: https://witestlab.poly.edu/blog/network-layer-security """
 
 #
 # NOTE: This code was machine converted. An actual human would not
