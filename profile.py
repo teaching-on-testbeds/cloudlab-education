@@ -1,4 +1,4 @@
-"""Topology for slowloris demo. To run this experiment, refer to the instructions at https://witestlab.poly.edu/blog/slowloris/ """
+"""Topology for "Redirect traffic to a wrong or fake site with DNS spoofing on a LAN". To run this experiment, refer to the instructions at https://witestlab.poly.edu/blog/redirect-traffic-to-a-wrong-or-fake-site-with-dns-spoofing-on-a-lan/ """
 
 #
 # NOTE: This code was machine converted. An actual human would not
