@@ -56,7 +56,7 @@ node_bank.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y 
 
 
 # Node bank
-node_bank_f = request.XenVM('bank')
+node_bank_f = request.XenVM('bankf')
 node_bank_f.routable_control_ip = True
 node_bank_f.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16-64-STD'
 node_bank_f.Site('Site 3')
