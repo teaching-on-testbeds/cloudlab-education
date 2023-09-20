@@ -56,10 +56,11 @@ node_bank.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y 
 
 
 # Node bank
-node_bank_f = request.XenVM('bank')
+node_bank_f = request.XenVM('bankf')
 node_bank_f.routable_control_ip = True
 node_bank_f.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16-64-STD'
 node_bank_f.Site('Site 3')
+node_bank_f.addService(pg.Execute('/bin/sh','sudo hostname bank'))
 node_bank_f.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install apache2 php libapache2-mod-php; sudo /etc/init.d/apache2 restart; sudo rm /var/www/html/index.html'))
 
 # Print the generated rspec
