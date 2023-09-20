@@ -72,5 +72,5 @@ node_bank_f.addService(pg.Execute('/bin/sh','sudo hostname bank'))
 node_bank_f.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install apache2 php libapache2-mod-php; sudo /etc/init.d/apache2 restart; sudo rm /var/www/html/index.html'))
 
 # Print the generated rspec
-pc.printRequestRSpec(request)node_romeo.exclusive = False
+pc.printRequestRSpec(request)
 
