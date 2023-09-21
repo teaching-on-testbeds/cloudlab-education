@@ -25,6 +25,7 @@ node_client.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-
 node_client.Site('Site 1')
 node_client.startVNC()
 node_client.exclusive = False
+node_client.addService(pg.Execute(shell="bash", command="sudo cp /local/repository/dhclient.conf /etc/dhcp/dhclient.conf"))
 node_client.addService(pg.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt purge firefox; /usr/bin/sudo /usr/bin/snap remove firefox; /usr/bin/sudo /usr/bin/add-apt-repository ppa:mozillateam/ppa -y ; /usr/bin/sudo /usr/bin/apt -y install firefox-esr; /usr/bin/sudo /usr/bin/ln -s /usr/bin/firefox-esr /usr/local/bin/firefox"))
 #node_client.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install tightvncserver firefox isc-dhcp-client; sudo wget -O /etc/dhcp/dhclient.conf https://bitbucket.org/ffund/run-my-experiment-on-geni-blog/raw/master/files/dns_spoofing_dhclient.conf'))
 iface0 = node_client.addInterface('interface-0', pg.IPv4Address('0.0.0.0','255.255.255.0'))
