@@ -6,7 +6,7 @@ In this experiment, we will see how broadcast storms can occur in a network with
 
 It should take about 1 hour to run this experiment.
 
-Instructions for running the experiment are at: https://witestlab.poly.edu/blog/the-spanning-tree-protocol/ """
+Instructions for running the experiment are at:  https://ffund.github.io/tcp-ip-essentials/lab-stp/ """
 # Import the Portal object.
 import geni.portal as portal
 # Import the ProtoGENI library.
