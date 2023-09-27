@@ -30,13 +30,13 @@ request = pc.makeRequestRSpec()
 # Node romeo
 node_romeo = request.XenVM('romeo')
 node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_romeo.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.1.100','255.255.255.0'))
 
 # Node router-int
 node_router_int = request.XenVM('router-int')
 node_router_int.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_router_int.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_router_int.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface1 = node_router_int.addInterface('interface-0', pg.IPv4Address('10.10.1.1','255.255.255.0'))
 iface2 = node_router_int.addInterface('interface-3', pg.IPv4Address('10.10.2.1','255.255.255.0'))
 iface3 = node_router_int.addInterface('interface-6', pg.IPv4Address('10.10.3.1','255.255.255.0'))
@@ -44,27 +44,27 @@ iface3 = node_router_int.addInterface('interface-6', pg.IPv4Address('10.10.3.1',
 # Node server
 node_server = request.XenVM('server')
 node_server.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_server.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_server.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface4 = node_server.addInterface('interface-4', pg.IPv4Address('10.10.2.100','255.255.255.0'))
 
 # Node vpn
 node_vpn = request.XenVM('vpn')
 node_vpn.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_vpn.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_vpn.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface5 = node_vpn.addInterface('interface-5', pg.IPv4Address('10.10.3.100','255.255.255.0'))
 iface6 = node_vpn.addInterface('interface-8', pg.IPv4Address('10.10.4.100','255.255.255.0'))
 
 # Node router-ext
 node_router_ext = request.XenVM('router-ext')
 node_router_ext.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_router_ext.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_router_ext.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface7 = node_router_ext.addInterface('interface-7', pg.IPv4Address('10.10.4.1','255.255.255.0'))
 iface8 = node_router_ext.addInterface('interface-10', pg.IPv4Address('10.10.5.1','255.255.255.0'))
 
 # Node juliet
 node_juliet = request.XenVM('juliet')
 node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-node_juliet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JTQIx | bash'))
+node_juliet.addService(pg.Execute('bash','sudo bash /local/repository/no-offload.sh'))
 iface9 = node_juliet.addInterface('interface-9', pg.IPv4Address('10.10.5.100','255.255.255.0'))
 
 # Link link-0
