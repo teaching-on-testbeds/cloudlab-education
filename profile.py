@@ -4,8 +4,7 @@
 In this experiment, you will observe how routing principles apply when packets are forwarded by a router from one network segment to the next.
 
 It should take about 60-120 minutes to run this experiment.
-
-Instructions for running the experiment are at : https://witestlab.poly.edu/blog/static-routing/ """
+"""
 
 # Import the Portal object.
 import geni.portal as portal
