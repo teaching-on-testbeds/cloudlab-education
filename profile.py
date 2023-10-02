@@ -101,58 +101,41 @@ node_hamlet.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -
 node_hamlet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/vSWTX | bash'))
 iface11 = node_hamlet.addInterface('interface-12', pg.IPv4Address('0.0.0.0','0.0.0.0'))
 
-# Link link-1
+# Link link-1 between routers
 link_1 = request.Link('link-1')
-link_1.Site('undefined')
-iface2.bandwidth = 1000
 iface2.bandwidth = 1000
 link_1.addInterface(iface2)
 iface4.bandwidth = 1000
-iface4.bandwidth = 1000
 link_1.addInterface(iface4)
-iface1.bandwidth = 1000
 iface1.bandwidth = 1000
 link_1.addInterface(iface1)
 
-# Link link-2
+# Link link-2 LAN A
 link_2 = request.Link('link-2')
-link_2.Site('undefined')
-iface7.bandwidth = 1000
 iface7.bandwidth = 1000
 link_2.addInterface(iface7)
 iface0.bandwidth = 1000
-iface0.bandwidth = 1000
 link_2.addInterface(iface0)
-iface6.bandwidth = 1000
 iface6.bandwidth = 1000
 link_2.addInterface(iface6)
 
-# Link link-3
+# Link link-3 LAN B
 link_3 = request.Link('link-3')
-link_3.Site('undefined')
-iface8.bandwidth = 1000
-iface8.bandwidth = 1000
-link_3.addInterface(iface8)
-iface3.bandwidth = 1000
 iface3.bandwidth = 1000
 link_3.addInterface(iface3)
-iface9.bandwidth = 1000
-iface9.bandwidth = 1000
-link_3.addInterface(iface9)
+iface10.bandwidth = 1000
+link_3.addInterface(iface10)
+iface11.bandwidth = 1000
+link_3.addInterface(iface11)
 
-# Link link-4
+# Link link-4 LAN C
 link_4 = request.Link('link-4')
-link_4.Site('undefined')
-iface11.bandwidth = 1000
-iface11.bandwidth = 1000
-link_4.addInterface(iface11)
-iface5.bandwidth = 1000
 iface5.bandwidth = 1000
 link_4.addInterface(iface5)
-iface10.bandwidth = 1000
-iface10.bandwidth = 1000
-link_4.addInterface(iface10)
-
+iface8.bandwidth = 1000
+link_4.addInterface(iface8)
+iface9.bandwidth = 1000
+link_4.addInterface(iface9)
 
 # Print the generated rspec
 pc.printRequestRSpec(request)
