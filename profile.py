@@ -33,7 +33,7 @@ node_router_a.Site('Site 1')
 node_router_a.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_a.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
 iface0 = node_router_a.addInterface('interface-5', pg.IPv4Address('0.0.0.0','0.0.0.0'))
-iface1 = node_router_a.addInterface('interface-0', pg.IPv4Address('10.10.100.1','255.255.255.0'))
+iface1 = node_router_a.addInterface('interface-0', pg.IPv4Address('10.1.10.1','255.255.255.0'))
 
 # Node router-b
 node_router_b = request.XenVM('router-b')
@@ -41,7 +41,7 @@ node_router_b.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU2
 node_router_b.Site('Site 1')
 node_router_b.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_b.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
-iface2 = node_router_b.addInterface('interface-2', pg.IPv4Address('10.10.100.2','255.255.255.0'))
+iface2 = node_router_b.addInterface('interface-2', pg.IPv4Address('10.1.10.2','255.255.255.0'))
 iface3 = node_router_b.addInterface('interface-9', pg.IPv4Address('0.0.0.0','0.0.0.0'))
 
 # Node router-c
@@ -50,7 +50,7 @@ node_router_c.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU2
 node_router_c.Site('Site 1')
 node_router_c.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install mtr'))
 node_router_c.addService(pg.Execute('/bin/sh','sudo sysctl -w net.ipv4.ip_forward=1'))
-iface4 = node_router_c.addInterface('interface-3', pg.IPv4Address('10.10.100.3','255.255.255.0'))
+iface4 = node_router_c.addInterface('interface-3', pg.IPv4Address('10.1.10.3','255.255.255.0'))
 iface5 = node_router_c.addInterface('interface-13', pg.IPv4Address('0.0.0.0','0.0.0.0'))
 
 # Node juliet
