@@ -6,7 +6,7 @@ Your task in this experiment is to set up subnets in a few small LANs to meet gi
 
 It should take about 60-120 minutes to run this experiment, *after* you work out what part of the address space to assign to each LAN.
 
-Instructions for running the experiment are at: https://witestlab.poly.edu/blog/designing-subnets/ """
+"""
 
 #
 # NOTE: This code was machine converted. An actual human would not
