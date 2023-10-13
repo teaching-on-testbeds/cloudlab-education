@@ -22,13 +22,19 @@ request = pc.makeRequestRSpec()
 node_romeo = request.XenVM('romeo')
 node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 node_romeo.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
-iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.10.0.100','255.255.255.0'))
+iface0 = node_romeo.addInterface('interface-1', pg.IPv4Address('10.0.0.100','255.255.255.0'))
+node_romeo.exclusive = False
+node_romeo.routable_control_ip = True # required for VNC
+node_romeo.startVNC()
 
 # Node juliet
 node_juliet = request.XenVM('juliet')
 node_juliet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
 node_juliet.addService(pg.Execute('/bin/sh','bash /local/repository/scripts/no-offload.sh'))
-iface1 = node_juliet.addInterface('interface-0', pg.IPv4Address('10.10.0.101','255.255.255.0'))
+iface1 = node_juliet.addInterface('interface-0', pg.IPv4Address('10.0.0.101','255.255.255.0'))
+node_juliet.exclusive = False
+node_juliet.routable_control_ip = True # required for VNC
+node_juliet.startVNC()
 
 # Link link-0
 link_0 = request.Link('link-0')
