@@ -1,4 +1,4 @@
-"""This is a basic profile with two hosts connected by a router.
+"""This is a profile for an experiment on multicast routing with PIM.
 Instructions:
 Wait for the profile instance to start, then log in to each node by clicking on it in the topology and choosing the `shell` menu item. 
 """
