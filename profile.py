@@ -34,7 +34,6 @@ link_0 = request.Link('link-0')
 link_0.disableMACLearning()
 link_0.addInterface(iface1)
 link_0.addInterface(iface0)
-link_0.addInterface(iface2)
 
 
 # Print the generated rspec
