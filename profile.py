@@ -21,9 +21,7 @@ request = pc.makeRequestRSpec()
 node_recon = request.RawPC('recon')
 node_recon.routable_control_ip = True
 node_recon.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-#node_recon.cores = 4
-#node_recon.ram = 8192
-
+node_recon.addService(pg.Execute('/bin/bash','/bin/bash /local/repository/recon_startup.sh'))
 iface0 = node_recon.addInterface('interface-1', pg.IPv4Address('10.10.1.2','255.255.255.0'))
 
 # Node router
@@ -53,11 +51,13 @@ iface5 = node_target3.addInterface('interface-9', pg.IPv4Address('10.10.2.112','
 
 # Link link-0
 link_0 = request.Link('link-0')
+link_0.disableMACLearning()
 link_0.addInterface(iface1)
 link_0.addInterface(iface0)
 
 # Link link-1
 link_1 = request.Link('link-1')
+link_1.disableMACLearning()
 link_1.addInterface(iface3)
 link_1.addInterface(iface2)
 link_1.addInterface(iface4)
