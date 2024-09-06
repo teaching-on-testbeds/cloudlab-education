@@ -18,11 +18,11 @@ pc = portal.Context()
 request = pc.makeRequestRSpec()
 
 # Node recon
-node_recon = request.XenVM('recon')
+node_recon = request.RawPC('recon')
 node_recon.routable_control_ip = True
 node_recon.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_recon.cores = 4
-node_recon.ram = 8192
+#node_recon.cores = 4
+#node_recon.ram = 8192
 
 iface0 = node_recon.addInterface('interface-1', pg.IPv4Address('10.10.1.2','255.255.255.0'))
 
