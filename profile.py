@@ -29,6 +29,7 @@ node_router = request.XenVM('router')
 node_router.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16-64-STD'
 iface1 = node_router.addInterface('interface-0', pg.IPv4Address('10.10.1.1','255.255.255.0'))
 iface2 = node_router.addInterface('interface-3', pg.IPv4Address('10.10.2.1','255.255.255.0'))
+node_router.exclusive = True
 
 # Node target1
 node_target1 = request.XenVM('target1')
@@ -36,18 +37,21 @@ node_target1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16
 node_target1.addService(pg.Execute('/bin/sh','sudo iptables -A INPUT -i eth1 -p ICMP -j DROP'))
 node_target1.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo apt-get -y install apache2'))
 iface3 = node_target1.addInterface('interface-2', pg.IPv4Address('10.10.2.45','255.255.255.0'))
+node_target1.exclusive = True
 
 # Node target2
 node_target2 = request.XenVM('target2')
 node_target2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16-64-STD'
 node_target2.addService(pg.Execute('/bin/sh','wget -O - https://git.io/Jt1D6 | bash'))
 iface4 = node_target2.addInterface('interface-8', pg.IPv4Address('10.10.2.97','255.255.255.0'))
+node_target2.exclusive = True
 
 # Node target3
 node_target3 = request.XenVM('target3')
 node_target3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU16-64-STD'
 node_target3.addService(pg.Execute('/bin/sh','sudo apt-get update; sudo DEBIAN_FRONTEND=noninteractive apt-get -y install postfix'))
 iface5 = node_target3.addInterface('interface-9', pg.IPv4Address('10.10.2.112','255.255.255.0'))
+node_target3.exclusive = True
 
 # Link link-0
 link_0 = request.Link('link-0')
