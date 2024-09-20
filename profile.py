@@ -22,19 +22,19 @@ node_alice.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-6
 node_alice.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt purge firefox; /usr/bin/sudo /usr/bin/snap remove firefox; /usr/bin/sudo /usr/bin/add-apt-repository ppa:mozillateam/ppa -y ; /usr/bin/sudo /usr/bin/apt -y install firefox-esr; /usr/bin/sudo /usr/bin/ln -s /usr/bin/firefox-esr /usr/local/bin/firefox"))
 node_alice.routable_control_ip = True # required for VNC
 node_alice.startVNC()
-iface_a = node_alice.addInterface('interface-alice', pg.IPv4Address('10.0.1.100','255.255.255.0'))
+iface_a = node_alice.addInterface('interface-alice', rspec.IPv4Address('10.0.1.100','255.255.255.0'))
 
 node_ca = request.XenVM('ca')
 node_ca.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-iface_c = node_ca.addInterface('interface-ca', pg.IPv4Address('10.0.1.101','255.255.255.0'))
+iface_c = node_ca.addInterface('interface-ca', rspec.IPv4Address('10.0.1.101','255.255.255.0'))
 
 node_website = request.XenVM('website')
 node_website.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-iface_w = node_website.addInterface('interface-website', pg.IPv4Address('10.0.1.102','255.255.255.0'))
+iface_w = node_website.addInterface('interface-website', rspec.IPv4Address('10.0.1.102','255.255.255.0'))
 
 node_mallory = request.XenVM('mallory')
 node_mallory.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
-iface_m = node_mallory.addInterface('interface-mallory', pg.IPv4Address('10.0.1.103','255.255.255.0'))
+iface_m = node_mallory.addInterface('interface-mallory', rspec.IPv4Address('10.0.1.103','255.255.255.0'))
 
 
 link_0 = request.Link('link-0')
