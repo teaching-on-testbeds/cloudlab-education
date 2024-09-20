@@ -1,6 +1,6 @@
-"""This is a basic profile with one node.
+"""This profile is for an experiment on digital experiments.
 Instructions:
-Wait for the profile instance to start, then click on the node in the topology and choose the `shell` menu item. 
+To run this experiment, follow the instructions at: https://witestlab.poly.edu/blog/p/digital-certificates 
 """
 
 # Import the Portal object.
@@ -16,6 +16,18 @@ request = pc.makeRequestRSpec()
  
 # Add a raw PC to the request.
 node = request.RawPC("node")
+
+node_alice = request.XenVM('alice')
+node_alice.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
+node_alice.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt purge firefox; /usr/bin/sudo /usr/bin/snap remove firefox; /usr/bin/sudo /usr/bin/add-apt-repository ppa:mozillateam/ppa -y ; /usr/bin/sudo /usr/bin/apt -y install firefox-esr; /usr/bin/sudo /usr/bin/ln -s /usr/bin/firefox-esr /usr/local/bin/firefox"))
+node_alice.routable_control_ip = True # required for VNC
+node_alice.startVNC()
+
+node_ca = request.XenVM('ca')
+
+node_website = request.XenVM('website')
+
+node_ca = request.XenVM('mallory')
 
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
