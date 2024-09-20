@@ -13,9 +13,11 @@ pc = portal.Context()
 
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
- 
-# Add a raw PC to the request.
-node = request.RawPC("node")
+
+# Declare that you will be starting X11 VNC on (some of) your nodes.
+# You must have this line for X11 VNC to work.
+request.initVNC()
+
 
 node_alice = request.XenVM('alice')
 node_alice.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
