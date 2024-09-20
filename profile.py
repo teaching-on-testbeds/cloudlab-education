@@ -1,4 +1,4 @@
-"""This profile is for an experiment on digital experiments.
+"""This profile is for an experiment on digital certificates and certificate authorities.
 Instructions:
 To run this experiment, follow the instructions at: https://witestlab.poly.edu/blog/p/digital-certificates 
 """
@@ -22,15 +22,27 @@ node_alice.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-6
 node_alice.addService(rspec.Execute(shell="bash", command="/usr/bin/sudo /usr/bin/apt purge firefox; /usr/bin/sudo /usr/bin/snap remove firefox; /usr/bin/sudo /usr/bin/add-apt-repository ppa:mozillateam/ppa -y ; /usr/bin/sudo /usr/bin/apt -y install firefox-esr; /usr/bin/sudo /usr/bin/ln -s /usr/bin/firefox-esr /usr/local/bin/firefox"))
 node_alice.routable_control_ip = True # required for VNC
 node_alice.startVNC()
+iface_a = node_alice.addInterface('interface-alice', pg.IPv4Address('10.0.1.100','255.255.255.0'))
 
 node_ca = request.XenVM('ca')
 node_ca.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+iface_c = node_ca.addInterface('interface-ca', pg.IPv4Address('10.0.1.101','255.255.255.0'))
 
 node_website = request.XenVM('website')
 node_website.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+iface_w = node_website.addInterface('interface-website', pg.IPv4Address('10.0.1.102','255.255.255.0'))
 
 node_mallory = request.XenVM('mallory')
 node_mallory.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD'
+iface_m = node_mallory.addInterface('interface-mallory', pg.IPv4Address('10.0.1.103','255.255.255.0'))
+
+
+link_0 = request.Link('link-0')
+link_0.disableMACLearning()
+link_0.addInterface(iface_a)
+link_0.addInterface(iface_c)
+link_0.addInterface(iface_w)
+link_0.addInterface(iface_m)
 
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
