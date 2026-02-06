@@ -65,8 +65,10 @@ request.addResource(vhost)
 
 def mkvm(name):
     node = ig.XenVM(name)
-    node.InstantiateOn('vhost-0')
-    node.exclusive = True
+    # Run this VM on the dedicated physical host.
+    # NOTE: Leave the VM non-exclusive; exclusivity is provided by vhost-0.
+    node.InstantiateOn(vhost)
+    node.exclusive = False
     if params.coresPerVM and params.coresPerVM > 0:
         node.cores = params.coresPerVM
     if params.ramPerVM and params.ramPerVM > 0:
