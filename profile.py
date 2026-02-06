@@ -19,34 +19,28 @@ import geni.rspec.emulab as emulab
 # Create a portal object,
 pc = portal.Context()
 
-ALLOWED_VHOST_TYPES = [
-    ('any','Any (no restriction)'),
-    ('c220g2','c220g2'),
-    ('c240g5','c240g5'),
-    ('m510','m510'),
+CLUSTER_URNS = {
+    'wisconsin': 'urn:publicid:IDN+wisc.cloudlab.us+authority+cm',
+    'utah': 'urn:publicid:IDN+utah.cloudlab.us+authority+cm',
+    'clemson': 'urn:publicid:IDN+clemson.cloudlab.us+authority+cm',
+}
+
+ALLOWED_PLACEMENTS = [
+    ('wisconsin:c240g5', 'CloudLab Wisconsin: c240g5'),
+    ('wisconsin:c220g2', 'CloudLab Wisconsin: c220g2'),
+    ('utah:c240g5', 'CloudLab Utah: c240g5'),
+    ('utah:c220g2', 'CloudLab Utah: c220g2'),
+    ('clemson:c240g5', 'CloudLab Clemson: c240g5'),
+    ('clemson:c220g2', 'CloudLab Clemson: c220g2'),
 ]
 
 pc.defineParameter(
-    'vhostType',
-    'Physical Host Type',
+    'placement',
+    'Cluster and Node Type',
     portal.ParameterType.STRING,
-    'c240g5',
-    ALLOWED_VHOST_TYPES,
-    longDescription='Restrict vhost-0 to a specific node type. Choose a larger type if allocation fails.')
-
-pc.defineParameter(
-    'coresPerVM',
-    'Cores per VM',
-    portal.ParameterType.INTEGER,
-    2,
-    longDescription='Requested CPU cores for each Xen VM.')
-
-pc.defineParameter(
-    'ramPerVM',
-    'RAM per VM (MB)',
-    portal.ParameterType.INTEGER,
-    1024,
-    longDescription='Requested RAM in MB for each Xen VM.')
+    ALLOWED_PLACEMENTS[0],
+    ALLOWED_PLACEMENTS,
+    longDescription='Select a cluster+node-type combination for vhost-0. All Xen VMs are forced onto that host/site.')
 
 params = pc.bindParameters()
 pc.verifyParameters()
@@ -55,24 +49,31 @@ pc.verifyParameters()
 request = pc.makeRequestRSpec()
 
 # Require that all VMs are instantiated on a single physical host.
+site_key, host_type = params.placement.split(':', 1)
+cm_urn = CLUSTER_URNS.get(site_key)
+if not cm_urn:
+    pc.reportError(
+        portal.ParameterError('Unknown placement selected.', ['placement']),
+        immediate=True)
+
 vhost = pg.RawPC('vhost-0')
 vhost.exclusive = True
-if params.vhostType and params.vhostType != 'any':
-    vhost.hardware_type = params.vhostType
+vhost.component_manager_id = cm_urn
+vhost.hardware_type = host_type
 # A Xen-capable host image is required to run XenVMs.
 vhost.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//XEN44-64-STD'
 request.addResource(vhost)
 
 def mkvm(name):
     node = ig.XenVM(name)
+    node.component_manager_id = cm_urn
     # Run this VM on the dedicated physical host.
     # For InstantiateOn to take effect, the VM must be in dedicated mode.
     node.InstantiateOn(vhost)
     node.exclusive = True
-    if params.coresPerVM and params.coresPerVM > 0:
-        node.cores = params.coresPerVM
-    if params.ramPerVM and params.ramPerVM > 0:
-        node.ram = params.ramPerVM
+    # Fixed VM sizing (not user-configurable via parameters).
+    node.cores = 2
+    node.ram = 1024
     node.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
     node.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
     request.addResource(node)
