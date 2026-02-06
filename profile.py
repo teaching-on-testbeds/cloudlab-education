@@ -11,64 +11,104 @@ Instructions for running the experiment are at:  https://ffund.github.io/tcp-ip-
 import geni.portal as portal
 # Import the ProtoGENI library.
 import geni.rspec.pg as pg
+# Import the InstaGENI library.
+import geni.rspec.igext as ig
 # Import the Emulab specific extensions.
 import geni.rspec.emulab as emulab
 
 # Create a portal object,
 pc = portal.Context()
 
+ALLOWED_VHOST_TYPES = [
+    ('any','Any (no restriction)'),
+    ('c220g2','c220g2'),
+    ('c240g5','c240g5'),
+    ('m510','m510'),
+]
+
+pc.defineParameter(
+    'vhostType',
+    'Physical Host Type',
+    portal.ParameterType.STRING,
+    'c240g5',
+    ALLOWED_VHOST_TYPES,
+    longDescription='Restrict vhost-0 to a specific node type. Choose a larger type if allocation fails.')
+
+pc.defineParameter(
+    'coresPerVM',
+    'Cores per VM',
+    portal.ParameterType.INTEGER,
+    2,
+    longDescription='Requested CPU cores for each Xen VM.')
+
+pc.defineParameter(
+    'ramPerVM',
+    'RAM per VM (MB)',
+    portal.ParameterType.INTEGER,
+    1024,
+    longDescription='Requested RAM in MB for each Xen VM.')
+
+params = pc.bindParameters()
+pc.verifyParameters()
+
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
+# Require that all VMs are instantiated on a single physical host.
+vhost = pg.RawPC('vhost-0')
+vhost.exclusive = True
+if params.vhostType and params.vhostType != 'any':
+    vhost.hardware_type = params.vhostType
+# A Xen-capable host image is required to run XenVMs.
+vhost.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops//XEN44-64-STD'
+request.addResource(vhost)
+
+def mkvm(name):
+    node = ig.XenVM(name)
+    node.InstantiateOn('vhost-0')
+    node.exclusive = True
+    if params.coresPerVM and params.coresPerVM > 0:
+        node.cores = params.coresPerVM
+    if params.ramPerVM and params.ramPerVM > 0:
+        node.ram = params.ramPerVM
+    node.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
+    node.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+    request.addResource(node)
+    return node
+
 # Node romeo
-node_romeo = request.XenVM('romeo')
-node_romeo.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_romeo.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_romeo = mkvm('romeo')
 iface0 = node_romeo.addInterface('interface-romeo-link3-4', pg.IPv4Address('10.10.0.100','255.255.255.0'))
 
 # Node hamlet
-node_hamlet = request.XenVM('hamlet')
-node_hamlet.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_hamlet.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_hamlet = mkvm('hamlet')
 iface1 = node_hamlet.addInterface('interface-hamlet-link1-2', pg.IPv4Address('10.10.0.102','255.255.255.0'))
 
 # Node othello
-node_othello = request.XenVM('othello')
-node_othello.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_othello.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_othello = mkvm('othello')
 iface2 = node_othello.addInterface('interface-othello-link2-3', pg.IPv4Address('10.10.0.104','255.255.255.0'))
 
 # Node petruchio
-node_petruchio = request.XenVM('petruchio')
-node_petruchio.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_petruchio.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_petruchio = mkvm('petruchio')
 iface3 = node_petruchio.addInterface('interface-petruchio-link1-4', pg.IPv4Address('10.10.0.106','255.255.255.0'))
 
 # Node bridge-1
-node_bridge_1 = request.XenVM('bridge-1')
-node_bridge_1.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_bridge_1.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_bridge_1 = mkvm('bridge-1')
 iface4 = node_bridge_1.addInterface('interface-br1-link1-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface5 = node_bridge_1.addInterface('interface-br1-link1-2', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-2
-node_bridge_2 = request.XenVM('bridge-2')
-node_bridge_2.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_bridge_2.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_bridge_2 = mkvm('bridge-2')
 iface6 = node_bridge_2.addInterface('interface-br2-link1-2', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface7 = node_bridge_2.addInterface('interface-br2-link2-3', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-3
-node_bridge_3 = request.XenVM('bridge-3')
-node_bridge_3.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_bridge_3.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_bridge_3 = mkvm('bridge-3')
 iface8 = node_bridge_3.addInterface('interface-br3-link2-3', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface9 = node_bridge_3.addInterface('interface-br3-link3-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
 # Node bridge-4
-node_bridge_4 = request.XenVM('bridge-4')
-node_bridge_4.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
-node_bridge_4.addService(pg.Execute('/bin/sh','wget -O - https://git.io/JUaUL | bash'))
+node_bridge_4 = mkvm('bridge-4')
 iface10 = node_bridge_4.addInterface('interface-br4-link1-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 iface11 = node_bridge_4.addInterface('interface-br4-link3-4', pg.IPv4Address('0.0.0.0','255.255.255.0'))
 
